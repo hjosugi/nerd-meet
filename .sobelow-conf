@@ -1,0 +1,21 @@
+# Sobelow configuration. Run with `mix sobelow --config`.
+[
+  verbose: false,
+  private: false,
+  skip: true,
+  router: "lib/nerd_meet_web/router.ex",
+  exit: "low",
+  format: "txt",
+  out: "",
+  threshold: "low",
+  # force_ssl is set in config/prod.exs, which Sobelow does not follow across
+  # files; the check fires on config/prod.exs regardless of the setting living
+  # there. Verified by hand rather than suppressed blindly.
+  #
+  # Traversal.FileModule fires on the snapshot writer. The only variable part
+  # of that path is the slug, which sanitize_slug/1 constrains to
+  # [a-z0-9][a-z0-9_-]{0,63} and which therefore cannot leave the snapshot
+  # directory. Reviewed rather than waved through.
+  ignore: ["Config.HTTPS", "Traversal.FileModule"],
+  ignore_files: []
+]

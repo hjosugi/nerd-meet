@@ -1,0 +1,18 @@
+# Gitleaks runs in CI. The default rule set is kept; the only additions are
+# allowlist entries for files whose "secrets" are fixed development values.
+#
+# Every one of them is documented in SECURITY.md and is useless outside a local
+# machine: production reads SECRET_KEY_BASE and VAULT_MASTER_KEY from the
+# environment and refuses to boot without them.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Development and test fixtures, not credentials"
+paths = [
+  '''config/dev\.exs''',
+  '''config/test\.exs''',
+  '''docker-compose\.yml''',
+  '''\.env\.example'''
+]

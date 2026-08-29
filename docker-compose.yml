@@ -1,0 +1,43 @@
+# A complete local environment: database, migrations, application.
+#
+#     docker compose up --build
+#     open http://localhost:4000
+#
+# The vault key below is a fixed development value and is in the repository on
+# purpose. Generate a real one with `mix nerd.gen.vault_key` before running
+# this anywhere that matters.
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: nerd_meet_prod
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ecto://postgres:postgres@db/nerd_meet_prod
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:-DEVELOPMENT_ONLY_secret_key_base_at_least_64_bytes_long_0000000000000000}
+      VAULT_MASTER_KEY: ${VAULT_MASTER_KEY:-bmVyZC1tZWV0LWNvbXBvc2UtbWFzdGVyLWtleS0zMmI=}
+      PHX_HOST: localhost
+      PHX_SERVER: "true"
+      PORT: "4000"
+    ports:
+      - "4000:4000"
+    command: >
+      sh -c "/app/bin/migrate && /app/bin/server"
+
+volumes:
+  pgdata:

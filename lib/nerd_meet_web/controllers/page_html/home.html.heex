@@ -1,0 +1,53 @@
+<div class="mx-auto max-w-3xl px-4 py-16">
+  <h1 class="text-3xl font-semibold tracking-tight text-zinc-900">nerd-meet</h1>
+  <p class="mt-3 text-lg text-zinc-600">
+    顔写真ではなく条件で探す、エンジニアのためのマッチング基盤。
+  </p>
+
+  <dl class="mt-10 grid gap-6 sm:grid-cols-2">
+    <div>
+      <dt class="font-medium text-zinc-900">構造化された検索</dt>
+      <dd class="mt-1 text-sm text-zinc-600">
+        スワイプもレコメンドもありません。条件を書き、条件で絞り、その条件をSQLとして公開できます。
+      </dd>
+    </div>
+    <div>
+      <dt class="font-medium text-zinc-900">相互条件マッチ</dt>
+      <dd class="mt-1 text-sm text-zinc-600">
+        相手の条件に自分が合致し、かつ自分の条件に相手が合致するかを突き合わせます。
+      </dd>
+    </div>
+    <div>
+      <dt class="font-medium text-zinc-900">k-匿名化された公開</dt>
+      <dd class="mt-1 text-sm text-zinc-600">
+        都道府県・年齢・経験年数はバンド化して公開します。人数が足りない組み合わせは公開されません。
+      </dd>
+    </div>
+    <div>
+      <dt class="font-medium text-zinc-900">鍵ごと消す削除</dt>
+      <dd class="mt-1 text-sm text-zinc-600">
+        メッセージは会話ごとの鍵で暗号化されます。削除は鍵の破棄であり、運営にも読めなくなります。
+      </dd>
+    </div>
+  </dl>
+
+  <div class="mt-10 flex gap-3">
+    <.link
+      navigate={~p"/directory"}
+      class="rounded bg-zinc-900 px-4 py-2 text-sm font-medium text-white"
+    >
+      ディレクトリを見る
+    </.link>
+    <a
+      href="https://github.com/hjosugi/nerd-meet"
+      class="rounded border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-700"
+    >
+      ソースコード
+    </a>
+  </div>
+
+  <p class="mt-12 text-xs text-zinc-500">
+    AGPL-3.0。改変して運用する場合はソースの公開が必要です。
+    モデレーション、匿名化、削除の実装はすべてこのリポジトリで確認できます。
+  </p>
+</div>
